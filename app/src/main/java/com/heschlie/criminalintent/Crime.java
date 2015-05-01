@@ -34,7 +34,11 @@ public class Crime {
         mTitle = title;
     }
 
-    public String getDate() {
+    public Date getDate() {
+        return mDate;
+    }
+
+    public String getDateString() {
         java.text.DateFormat df = DateFormat.getLongDateFormat(mContext);
         return DateFormat.format("EEEE", mDate) +", " + df.format(mDate);
     }

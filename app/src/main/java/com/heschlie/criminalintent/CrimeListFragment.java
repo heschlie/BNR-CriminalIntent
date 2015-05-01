@@ -1,11 +1,9 @@
 package com.heschlie.criminalintent;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -65,7 +63,7 @@ public class CrimeListFragment extends ListFragment {
             titleTextView.setText(c.getTitle());
 
             TextView dateTextView = (TextView)convertView.findViewById(R.id.crime_list_item_dateTextView);
-            dateTextView.setText(c.getDate());
+            dateTextView.setText(c.getDateString());
 
             CheckBox solvedCheckBox = (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
             solvedCheckBox.setChecked(c.isSolved());
