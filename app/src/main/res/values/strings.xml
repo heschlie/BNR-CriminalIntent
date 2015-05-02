@@ -7,4 +7,10 @@
     <string name="crime_solved_label">Solved?</string>
     <string name="crimes_title">Crimes</string>
     <string name="date_picker_title">Date of crime:</string>
+    <string name="picker_title">Pick Date or Time</string>
+
+    <string-array name="date_picker_array">
+        <item>Set Date</item>
+        <item>Set Time</item>
+    </string-array>
 </resources>
