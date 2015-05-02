@@ -16,6 +16,7 @@ import java.util.Date;
 public class PickerDialogFragment extends DialogFragment {
     private static final String TAG = "PickerDialogFragment";
     private static final String DIALOG_DATE = "date";
+    private static final String DIALOG_TIME = "time";
 
     private Date mDate;
 
@@ -47,6 +48,9 @@ public class PickerDialogFragment extends DialogFragment {
                                 dateDialog.show(fm, DIALOG_DATE);
                                 break;
                             case 1:
+                                TimePickerFragment timeDialog = TimePickerFragment.newInstance(mDate);
+                                timeDialog.setTargetFragment(getTargetFragment(), CrimeFragment.REQUEST_DATE);
+                                timeDialog.show(fm, DIALOG_TIME);
                                 break;
                         }
                     }

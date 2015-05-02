@@ -3,6 +3,7 @@ package com.heschlie.criminalintent;
 import android.content.Context;
 import android.text.format.DateFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,7 +41,9 @@ public class Crime {
 
     public String getDateString() {
         java.text.DateFormat df = DateFormat.getLongDateFormat(mContext);
-        return DateFormat.format("EEEE", mDate) +", " + df.format(mDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return DateFormat.format("EEEE", mDate) +", " + df.format(mDate) +
+                ", " + sdf.format(mDate);
     }
 
     public void setDate(Date date) {
