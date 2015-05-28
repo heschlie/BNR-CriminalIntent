@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,7 +35,9 @@ public class CrimeFragment extends Fragment {
     private static final String TAG = "CrimeFragment";
     public static final String EXTRA_CRIME_ID = "com.heschlie.ciminalintent.crime_id";
     private static final String DIALOG_PICKER = "picker";
+    private static final String DELETE_PICKER = "delete";
     public static final int REQUEST_DATE = 0;
+    public static final int CONFIRM_DELETE = 1;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -130,10 +133,19 @@ public class CrimeFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, Integer.toString(requestCode));
         if (resultCode != Activity.RESULT_OK) return;
-        if (requestCode == REQUEST_DATE) {
-            Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mCrime.setDate(date);
-            updateDate();
+        switch (requestCode) {
+            case REQUEST_DATE:
+                Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+                mCrime.setDate(date);
+                updateDate();
+                break;
+
+            case CONFIRM_DELETE:
+                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                if (NavUtils.getParentActivityName(getActivity()) != null) {
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                break;
         }
     }
 
@@ -147,10 +159,10 @@ public class CrimeFragment extends Fragment {
                 return true;
 
             case R.id.menu_item_delete_crime:
-                CrimeLab.get(getActivity()).deleteCrime(mCrime);
-                if (NavUtils.getParentActivityName(getActivity()) != null) {
-                    NavUtils.navigateUpFromSameTask(getActivity());
-                }
+                DeletePickerFragment deletePicker = new DeletePickerFragment();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                deletePicker.setTargetFragment(CrimeFragment.this, CONFIRM_DELETE);
+                deletePicker.show(fm, DELETE_PICKER);
                 return true;
 
             default:
