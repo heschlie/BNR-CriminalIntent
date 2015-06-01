@@ -142,9 +142,7 @@ public class CrimeFragment extends Fragment {
 
             case CONFIRM_DELETE:
                 CrimeLab.get(getActivity()).deleteCrime(mCrime);
-                if (NavUtils.getParentActivityName(getActivity()) != null) {
-                    NavUtils.navigateUpFromSameTask(getActivity());
-                }
+                getActivity().finish();
                 break;
         }
     }

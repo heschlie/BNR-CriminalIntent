@@ -15,6 +15,7 @@
     <string name="delete_crime">Delete</string>
     <string name="empty_list">There are no crimes to display</string>
     <string name="delete_confirm">Delete this crime?</string>
+    <string name="take">Take!</string>
 
     <string-array name="date_picker_array">
         <item>Set Date</item>
