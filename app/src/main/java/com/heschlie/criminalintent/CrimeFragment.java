@@ -38,6 +38,7 @@ import java.util.UUID;
  */
 public class CrimeFragment extends Fragment {
     private static final String TAG = "CrimeFragment";
+    private static final String DIALOG_IMAGE = "image";
     public static final String EXTRA_CRIME_ID = "com.heschlie.ciminalintent.crime_id";
     private static final String DIALOG_PICKER = "picker";
     private static final String DELETE_PICKER = "delete";
@@ -159,6 +160,18 @@ public class CrimeFragment extends Fragment {
         });
 
         mPhotoView = (ImageView)v.findViewById(R.id.crime_imageView);
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Photo p = mCrime.getPhoto();
+                if (p == null)
+                    return;
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                String path = getActivity().getFileStreamPath(p.getFilename()).getAbsolutePath();
+                ImageFragment.newInstance(path).show(fm, DIALOG_IMAGE);
+            }
+        });
 
         PackageManager pm = getActivity().getPackageManager();
         boolean hasCamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||

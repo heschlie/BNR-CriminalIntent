@@ -42,7 +42,7 @@ public class Crime {
         mSolved = json.getBoolean(JSON_SOLVED);
         mDate = new Date(json.getLong(JSON_DATE));
         if (json.has(JSON_PHOTO)) {
-            mPhoto = new Photo(json.getJSONObject(JSON_PHOTO));
+            mPhoto = new Photo(json.getString(JSON_PHOTO));
         }
     }
 
